@@ -1,0 +1,47 @@
+{
+  "name": "dno-api",
+  "version": "1.0.0",
+  "description": "API for DataNetworkOverlock project",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist && rimraf coverage",
+    "prebuild": "rm -rf dist",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "audit": "npm audit",
+    "lint:fix": "eslint --fix .",
+    "lint": "eslint .",
+    "prettier:list": "prettier --list-different \"./{test,src}/**/*.ts\" || ECHO .",
+    "prettier:write": "prettier --write  \"./{test,src}/**/*.ts\"",
+    "prettier": "prettier --check  \"./{test,src}/**/*.ts\"",
+    "dev": "nodemon dist/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DataNetworkOverlock/dno-api.git"
+  },
+  "author": "miklegonza",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DataNetworkOverlock/dno-api/issues"
+  },
+  "homepage": "https://github.com/DataNetworkOverlock/dno-api#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "inversify": "^6.0.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "@types/uuid": "^9.0.6",
+    "eslint": "^8.52.0",
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "prettier-eslint": "^16.1.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
