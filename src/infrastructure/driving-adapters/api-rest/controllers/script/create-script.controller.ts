@@ -3,7 +3,7 @@ import { MySQLScriptRepository } from '@infrastructure/implementations/mysql/MyS
 import { NextFunction, Request, Response } from 'express';
 
 export const createScript = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const { id, name, description, source } = req.body;
+    const { id, name, description, source, tags } = req.body;
     const mySQLScriptRepository = new MySQLScriptRepository();
     const createScriptUseCase = new CreateScriptUseCase(mySQLScriptRepository);
 
@@ -13,6 +13,7 @@ export const createScript = async (req: Request, res: Response, next: NextFuncti
             name,
             description,
             source,
+            tags,
         });
         res.json(scriptCreated);
         return;

@@ -29,3 +29,11 @@ export class Source {
         this.value = value;
     }
 }
+
+export class Tags {
+    readonly value: string[];
+
+    constructor(value: string[]) {
+        this.value = value;
+    }
+}
