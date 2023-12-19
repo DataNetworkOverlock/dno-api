@@ -29,7 +29,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
 
         res.json(userCreated);
         return;
-    } catch (e) {
-        return next(e);
+    } catch (err) {
+        return next(err);
     }
 };
