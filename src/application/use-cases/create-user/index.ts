@@ -1,6 +1,6 @@
-import { User } from '../../../domain/entities/user/user';
-import { Answer, Id, Name, Password, Question, Username } from '../../../domain/entities/user/value-objects';
-import { UserRepository } from '../../../domain/repositories/user-repository';
+import { User } from '@domain/entities/user/user';
+import { Answer, Id, Name, Password, Question, Username } from '@domain/entities/user/value-objects';
+import { UserRepository } from '@domain/repositories/user-repository';
 // Exceptions come from domain/exceptions
 
 interface UserInterface {

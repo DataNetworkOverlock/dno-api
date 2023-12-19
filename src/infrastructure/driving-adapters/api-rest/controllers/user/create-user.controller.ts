@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { MySQLUserRepository } from '../../../../implementations/mysql/MySQLUserRepository';
-import { CreateUserUseCase } from '../../../../../application/use-cases/create-user';
+import { MySQLUserRepository } from '@infrastructure/implementations/mysql/MySQLUserRepository';
+import { CreateUserUseCase } from '@application/use-cases/create-user';
 //import { UuidV4Generator } from '@infrastructure/UuidV4Generator'
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

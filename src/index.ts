@@ -1,5 +1,6 @@
+import 'module-alias/register';
 import 'dotenv/config';
-import { Server } from './infrastructure/driving-adapters/api-rest/Server';
+import { Server } from '@api/Server';
 
 const port: string = process.env.PORT || '3000';
 const server: Server = new Server(port);

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import userRoutes from './user.routes';
+import userRoutes from '@api/routes/user.routes';
 
 const route = Router();
 

@@ -1,6 +1,6 @@
-import { User } from 'domain/entities/user/user';
-import { UserRepository } from 'domain/repositories/user-repository';
-import { MySQL } from '../../driven-adapters/MySQL';
+import { User } from '@domain/entities/user/user';
+import { UserRepository } from '@domain/repositories/user-repository';
+import { MySQL } from '@infrastructure/driven-adapters/MySQL';
 
 export class MySQLUserRepository implements UserRepository {
     private readonly db = MySQL.getInstance();

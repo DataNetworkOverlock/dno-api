@@ -1,5 +1,5 @@
-import { Id, Name, Username, Password, Question, Answer } from './value-objects';
-import { EntityRoot } from '../entity-root';
+import { Id, Name, Username, Password, Question, Answer } from '@domain/entities/user/value-objects';
+import { EntityRoot } from '@domain/entities/entity-root';
 
 interface PrimitiveData {
     id: string;
