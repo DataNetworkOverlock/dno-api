@@ -9,9 +9,4 @@ route.get('', () => {
 route.post('', createUserController);
 route.delete('/:id', deleteUserController);
 
-/* 
-route.put('/:userId', updateUserController)
-route.get('', getAllUsersController)
-route.post('', createUserController) */
-
 export default route;
