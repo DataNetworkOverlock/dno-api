@@ -4,6 +4,12 @@
         "module": "commonjs" /* Specify what module code is generated. */,
         "rootDir": "./src" /* Specify the root folder within your source files. */,
         "baseUrl": "./src" /* Specify the base directory to resolve non-relative module names. */,
+        "paths": {
+            "@domain/*": ["domain/*"],
+            "@application/*": ["application/*"],
+            "@infrastructure/*": ["infrastructure/*"],
+            "@api/*": ["infrastructure/driving-adapters/api-rest/*"]
+        },
         "resolveJsonModule": true /* Enable importing .json files. */,
         "outDir": "./dist" /* Specify an output folder for all emitted files. */,
         "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,

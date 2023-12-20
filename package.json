@@ -1,6 +1,6 @@
 {
   "name": "dno-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API for DataNetworkOverlock project",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "inversify": "^6.0.2",
+    "module-alias": "^2.2.3",
     "mysql": "^2.18.1",
     "uuid": "^9.0.1"
   },
@@ -53,6 +54,6 @@
     "@infrastructure": "dist/infrastructure",
     "@application": "dist/application",
     "@domain": "dist/domain",
-    "@shared": "dist/shared"
+    "@api": "dist/infrastructure/driving-adapters/api-rest"
   }
 }

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { MySQLUserRepository } from '../../../../implementations/mysql/MySQLUserRepository';
-import { CreateUserUseCase } from '../../../../../application/use-cases/create-user';
+import { MySQLUserRepository } from '@infrastructure/implementations/mysql/MySQLUserRepository';
+import { CreateUserUseCase } from '@application/use-cases/create-user';
 //import { UuidV4Generator } from '@infrastructure/UuidV4Generator'
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -29,7 +29,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
 
         res.json(userCreated);
         return;
-    } catch (e) {
-        return next(e);
+    } catch (err) {
+        return next(err);
     }
 };
