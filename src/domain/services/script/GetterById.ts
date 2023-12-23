@@ -9,11 +9,6 @@ export class ScriptGetterById {
     }
 
     async run(id: string): Promise<Script> {
-        const script = await this.scriptRepository.getById(id);
-        if (!script) {
-            // TODO - Add exceptions
-            throw new Error('ScriptId not found');
-        }
-        return script;
+        return await this.scriptRepository.getById(id);
     }
 }

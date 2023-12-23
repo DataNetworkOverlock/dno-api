@@ -1,33 +1,26 @@
-import { NextFunction, Request, Response } from 'express';
-import { MySQLUserRepository } from '@infrastructure/implementations/mysql/MySQLUserRepository';
 import { CreateUserUseCase } from '@application/use-cases/create-user';
-//import { UuidV4Generator } from '@infrastructure/UuidV4Generator'
+import { UuidV4Generator } from '@infrastructure/driven-adapters/UuidV4';
+import { MySQLUserRepository } from '@infrastructure/implementations/mysql/MySQLUserRepository';
+import { NextFunction, Request, Response } from 'express';
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const {
-        id, // DEL - delete after uuid generator
-        name,
-        username,
-        password,
-        question,
-        answer,
-    } = req.body;
+    const { name, username, password, question, answer } = req.body;
 
     const mysqlUserRepository = new MySQLUserRepository();
-    //const uuidV4Generator = new UuidV4Generator()
-    const createUserUseCase = new CreateUserUseCase(mysqlUserRepository);
+    const uuidV4Generator = new UuidV4Generator();
+    const createUserUseCase = new CreateUserUseCase(mysqlUserRepository, uuidV4Generator);
 
     try {
-        const userCreated = await createUserUseCase.run({
-            id, // DEL - delete after uuid generator
+        const user = {
             name,
             username,
             password,
             question,
             answer,
-        });
-
-        res.json(userCreated);
+        };
+        const userCreated = await createUserUseCase.run(user);
+        const response = { userCreated, metadata: user };
+        res.json(response);
         return;
     } catch (err) {
         return next(err);

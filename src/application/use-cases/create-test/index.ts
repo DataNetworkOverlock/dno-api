@@ -1,9 +1,9 @@
 import { Test } from '@domain/entities/test/test';
 import { Date, Id, Ip, Report, ScriptId, UserId } from '@domain/entities/test/value-objects';
 import { TestRepository } from '@domain/repositories/test-repository';
+import { UuidGenerator } from '@domain/utils/uuidGenerator';
 
 interface TestInterface {
-    id: string;
     ip: string;
     date: Date;
     report: string;
@@ -13,15 +13,16 @@ interface TestInterface {
 
 export class CreateTestUseCase {
     private readonly testRepository: TestRepository;
+    private readonly uuidGenerator: UuidGenerator;
 
-    constructor(testRepository: TestRepository) {
+    constructor(testRepository: TestRepository, uuidGenerator: UuidGenerator) {
         this.testRepository = testRepository;
+        this.uuidGenerator = uuidGenerator;
     }
 
     async run(params: TestInterface) {
-        // TODO - Add uuid generator
         const test = new Test({
-            id: new Id(params.id),
+            id: new Id(this.uuidGenerator.generate()),
             ip: new Ip(params.ip),
             date: new Date(params.date),
             report: new Report(params.report),
