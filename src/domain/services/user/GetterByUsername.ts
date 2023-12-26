@@ -9,11 +9,6 @@ export class UserGetterByUsername {
     }
 
     async run(username: string): Promise<User> {
-        const user = await this.userRepository.getByUsername(username);
-        if (!user) {
-            // TODO - Add exceptions
-            throw new Error('Username not found');
-        }
-        return user;
+        return await this.userRepository.getByUsername(username);
     }
 }
