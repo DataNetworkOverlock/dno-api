@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node --env-file=.env dist/index",
     "dev": "npm run build && node --env-file=.env dist/index",
-    "clean": "rimraf dist && rimraf coverage",
-    "prebuild": "rm -rf dist",
+    "clean": "rm -rf dist",
     "build": "npm run clean && tsc -p tsconfig.json",
     "test": "jest",
     "test:coverage": "jest --coverage",
