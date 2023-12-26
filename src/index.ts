@@ -1,5 +1,4 @@
 import 'module-alias/register';
-import 'dotenv/config';
 import { Server } from '@api/Server';
 
 const port: string = process.env.PORT || '3000';

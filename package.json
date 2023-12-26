@@ -1,9 +1,11 @@
 {
   "name": "dno-api",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "API for DataNetworkOverlock project",
   "main": "index.js",
   "scripts": {
+    "start": "node --env-file=.env dist/index",
+    "dev": "npm run build && node --env-file=.env dist/index",
     "clean": "rimraf dist && rimraf coverage",
     "prebuild": "rm -rf dist",
     "build": "npm run clean && tsc -p tsconfig.json",
@@ -15,7 +17,8 @@
     "prettier:list": "prettier --list-different \"./{test,src}/**/*.ts\" || ECHO .",
     "prettier:write": "prettier --write  \"./{test,src}/**/*.ts\"",
     "prettier": "prettier --check  \"./{test,src}/**/*.ts\"",
-    "dev": "node dist/index"
+    "predeploy": "npm install --omit=dev && npm run build",
+    "deploy": "pm2 start \"npm run start\""
   },
   "repository": {
     "type": "git",
@@ -28,7 +31,6 @@
   },
   "homepage": "https://github.com/DataNetworkOverlock/dno-api#readme",
   "dependencies": {
-    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "inversify": "^6.0.2",
     "module-alias": "^2.2.3",
