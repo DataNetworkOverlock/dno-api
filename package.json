@@ -16,7 +16,6 @@
     "prettier:list": "prettier --list-different \"./{test,src}/**/*.ts\" || ECHO .",
     "prettier:write": "prettier --write  \"./{test,src}/**/*.ts\"",
     "prettier": "prettier --check  \"./{test,src}/**/*.ts\"",
-    "predeploy": "npm install --omit=dev && npm run build",
     "deploy": "pm2 start \"npm run start\""
   },
   "repository": {
