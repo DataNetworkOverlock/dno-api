@@ -9,6 +9,8 @@ export class TestGetterUseCase {
     }
 
     async run(): Promise<Test[]> {
-        return await this.testRepository.getAll();
+        const tests = await this.testRepository.getAll();
+        if (tests.length < 1) throw new Error('No tests found');
+        return tests;
     }
 }

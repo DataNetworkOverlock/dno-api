@@ -11,7 +11,7 @@ export class MySQLScriptRepository implements ScriptRepository {
     async create(script: Script): Promise<Script> {
         const statement = `INSERT INTO ${this.table} SET ?`;
         const data = {
-            uuid: script.id.value,
+            uuid: script.uuid.value,
             name: script.name.value,
             description: script.description.value,
             source: script.source.value,
@@ -25,19 +25,19 @@ export class MySQLScriptRepository implements ScriptRepository {
         }
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(uuid: string): Promise<void> {
         const statement = `DELETE FROM ${this.table} WHERE uuid = ?`;
         try {
-            return await this.db.query(statement, id);
+            return await this.db.query(statement, uuid);
         } catch (error) {
             throw new Error(`Error al eliminar: ${error}`);
         }
     }
 
-    async getById(id: string): Promise<Script> {
+    async getById(uuid: string): Promise<Script> {
         const statement = `SELECT * FROM ${this.table} WHERE uuid = ?`;
         try {
-            return await this.db.query(statement, id);
+            return await this.db.query(statement, uuid);
         } catch (error) {
             throw new Error(`Error al consultar: ${error}`);
         }

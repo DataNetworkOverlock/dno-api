@@ -9,7 +9,7 @@ export class MySQLTestRepository implements TestRepository {
     async create(test: Test): Promise<Test> {
         const statement = `INSERT INTO ${this.table} SET ?`;
         const data = {
-            uuid: test.id.value,
+            uuid: test.uuid.value,
             ip: test.ip.value,
             date: test.date.value,
             report: test.report.value,
@@ -23,19 +23,21 @@ export class MySQLTestRepository implements TestRepository {
         }
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(uuid: string): Promise<void> {
         const statement = `DELETE FROM ${this.table} WHERE uuid = ?`;
         try {
-            return await this.db.query(statement, id);
+            return await this.db.query(statement, uuid);
         } catch (error) {
             throw new Error(`Error al eliminar: ${error}`);
         }
     }
 
-    async getById(id: string): Promise<Test> {
+    async getById(uuid: string): Promise<Test | null> {
         const statement = `SELECT * FROM ${this.table} WHERE uuid = ?`;
         try {
-            return await this.db.query(statement, id);
+            const test = await this.db.query(statement, uuid);
+            if (test.length > 0) return test;
+            return null;
         } catch (error) {
             throw new Error(`Error al consultar: ${error}`);
         }

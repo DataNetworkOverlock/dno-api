@@ -7,8 +7,8 @@ export const getAllTests = async (req: Request, res: Response, next: NextFunctio
     const getTestsUseCase = new TestGetterUseCase(mysqlTestRepository);
 
     try {
-        const users = await getTestsUseCase.run();
-        res.json(users);
+        const tests = await getTestsUseCase.run();
+        res.status(200).json(tests);
         return;
     } catch (err) {
         return next(err);

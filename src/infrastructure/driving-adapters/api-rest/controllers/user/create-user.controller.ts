@@ -19,8 +19,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
             answer,
         };
         const userCreated = await createUserUseCase.run(user);
-        const response = { userCreated, metadata: user };
-        res.json(response);
+        res.status(200).json(userCreated);
         return;
     } catch (err) {
         return next(err);

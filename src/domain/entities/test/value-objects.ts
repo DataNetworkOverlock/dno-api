@@ -1,4 +1,4 @@
-export class Id {
+export class Uuid {
     readonly value: string;
 
     constructor(value: string) {
