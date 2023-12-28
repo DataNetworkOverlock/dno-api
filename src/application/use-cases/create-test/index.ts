@@ -1,5 +1,5 @@
 import { Test } from '@domain/entities/test/test';
-import { Date, Id, Ip, Report, ScriptId, UserId } from '@domain/entities/test/value-objects';
+import { Date, Uuid, Ip, Report, ScriptId, UserId } from '@domain/entities/test/value-objects';
 import { TestRepository } from '@domain/repositories/test-repository';
 import { UuidGenerator } from '@domain/utils/uuidGenerator';
 
@@ -22,13 +22,17 @@ export class CreateTestUseCase {
 
     async run(params: TestInterface) {
         const test = new Test({
-            id: new Id(this.uuidGenerator.generate()),
+            uuid: new Uuid(this.uuidGenerator.generate()),
             ip: new Ip(params.ip),
             date: new Date(params.date),
             report: new Report(params.report),
             userId: new UserId(params.userId),
             scriptId: new ScriptId(params.scriptId),
         });
-        return await this.testRepository.create(test);
+        const result = await this.testRepository.create(test);
+        return {
+            result,
+            metadata: test.toPrimitives(),
+        };
     }
 }

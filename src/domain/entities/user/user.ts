@@ -1,8 +1,8 @@
-import { Id, Name, Username, Password, Question, Answer } from '@domain/entities/user/value-objects';
+import { Uuid, Name, Username, Password, Question, Answer } from '@domain/entities/user/value-objects';
 import { EntityRoot } from '@domain/entities/entity-root';
 
 interface PrimitiveData {
-    id: string;
+    uuid: string;
     name: string;
     username: string;
     password: string;
@@ -11,7 +11,7 @@ interface PrimitiveData {
 }
 
 export class User extends EntityRoot<User, PrimitiveData> {
-    readonly id: Id;
+    readonly uuid: Uuid;
     readonly name: Name;
     readonly username: Username;
     readonly password: Password;
@@ -19,14 +19,14 @@ export class User extends EntityRoot<User, PrimitiveData> {
     readonly answer: Answer;
 
     constructor({
-        id,
+        uuid,
         name,
         username,
         password,
         question,
         answer,
     }: {
-        id: Id;
+        uuid: Uuid;
         name: Name;
         username: Username;
         password: Password;
@@ -34,7 +34,7 @@ export class User extends EntityRoot<User, PrimitiveData> {
         answer: Answer;
     }) {
         super();
-        this.id = id;
+        this.uuid = uuid;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -43,7 +43,7 @@ export class User extends EntityRoot<User, PrimitiveData> {
     }
 
     static create(
-        id: Id,
+        uuid: Uuid,
         name: Name,
         username: Username,
         password: Password,
@@ -51,7 +51,7 @@ export class User extends EntityRoot<User, PrimitiveData> {
         answer: Answer,
     ): User {
         const user = new User({
-            id,
+            uuid,
             name,
             username,
             password,
@@ -63,7 +63,7 @@ export class User extends EntityRoot<User, PrimitiveData> {
     }
 
     static fromPrimitives(plainData: {
-        id: string;
+        uuid: string;
         name: string;
         username: string;
         password: string;
@@ -71,7 +71,7 @@ export class User extends EntityRoot<User, PrimitiveData> {
         answer: string;
     }): User {
         return new User({
-            id: new Id(plainData.id),
+            uuid: new Uuid(plainData.uuid),
             name: new Name(plainData.name),
             username: new Username(plainData.username),
             password: new Password(plainData.password),
@@ -82,7 +82,7 @@ export class User extends EntityRoot<User, PrimitiveData> {
 
     toPrimitives(): PrimitiveData {
         return {
-            id: this.id.value,
+            uuid: this.uuid.value,
             name: this.name.value,
             username: this.username.value,
             password: this.password.value,

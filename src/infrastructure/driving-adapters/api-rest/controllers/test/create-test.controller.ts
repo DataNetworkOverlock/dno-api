@@ -19,7 +19,7 @@ export const createTest = async (req: Request, res: Response, next: NextFunction
             scriptId,
         });
 
-        res.json(testCreated);
+        res.status(200).json(testCreated);
         return;
     } catch (err) {
         return next(err);

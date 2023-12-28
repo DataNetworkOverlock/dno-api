@@ -8,12 +8,8 @@ export class UserGetterById {
         this.userRepository = userRepository;
     }
 
-    async run(id: string): Promise<User> {
-        const user = await this.userRepository.getById(id);
-        if (!user) {
-            // TODO - Add exceptions
-            throw new Error('UserId not found');
-        }
-        return user;
+    async run(uuid: string): Promise<User | null> {
+        // TODO - Add exceptions
+        return await this.userRepository.getById(uuid);
     }
 }

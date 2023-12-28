@@ -8,7 +8,7 @@ export class UserGetterByUsername {
         this.userRepository = userRepository;
     }
 
-    async run(username: string): Promise<User> {
+    async run(username: string): Promise<User | null> {
         return await this.userRepository.getByUsername(username);
     }
 }

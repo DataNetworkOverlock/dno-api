@@ -8,7 +8,7 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
 
     try {
         const users = await getUsersUseCase.run();
-        res.json(users);
+        res.status(200).json(users);
         return;
     } catch (err) {
         return next(err);

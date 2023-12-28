@@ -9,6 +9,8 @@ export class ScriptGetterUseCase {
     }
 
     async run(): Promise<Script[]> {
-        return await this.scriptRepository.getAll();
+        const scripts = await this.scriptRepository.getAll();
+        if (scripts.length < 1) throw new Error('No Scripts found');
+        return scripts;
     }
 }

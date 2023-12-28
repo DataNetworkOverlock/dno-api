@@ -9,7 +9,7 @@ export class MySQLUserRepository implements UserRepository {
     async create(user: User): Promise<User> {
         const statement = `INSERT INTO ${this.table} SET ?`;
         const data = {
-            uuid: user.id.value,
+            uuid: user.uuid.value,
             name: user.name.value,
             username: user.username.value,
             password: user.password.value,
@@ -23,29 +23,36 @@ export class MySQLUserRepository implements UserRepository {
         }
     }
 
-    async delete(id: string): Promise<void> {
+    async delete(uuid: string): Promise<void> {
         const statement = `DELETE FROM ${this.table} WHERE uuid = ?`;
         try {
-            return await this.db.query(statement, id);
+            return await this.db.query(statement, uuid);
         } catch (error) {
             throw new Error(`Error al eliminar: ${error}`);
         }
     }
 
-    async getById(id: string): Promise<User> {
+    async getById(uuid: string): Promise<User | null> {
         const statement = `SELECT * FROM ${this.table} WHERE uuid = ?`;
         try {
-            return await this.db.query(statement, id);
+            const user = await this.db.query(statement, uuid);
+            if (user.length > 0) return user;
+            return null;
         } catch (error) {
             throw new Error(`Error al consultar: ${error}`);
         }
     }
 
-    async getByUsername(username: string): Promise<User> {
+    async getByUsername(username: string): Promise<User | null> {
         // TODO - limit the user query
         const statement = `SELECT * FROM ${this.table} WHERE username = ?`;
         try {
-            return await this.db.query(statement, username);
+            const user = await this.db.query(statement, username);
+            if (user.length > 0) {
+                const result = JSON.parse(JSON.stringify(user));
+                return result[0];
+            }
+            return null;
         } catch (error) {
             throw new Error(`Error al consultar: ${error}`);
         }

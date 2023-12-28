@@ -8,7 +8,7 @@ export class DeleteUserUseCase {
         this.userRepository = userRepository;
     }
 
-    async run(id: string) {
-        return await this.userRepository.delete(id);
+    async run(uuid: string) {
+        return await this.userRepository.delete(uuid);
     }
 }

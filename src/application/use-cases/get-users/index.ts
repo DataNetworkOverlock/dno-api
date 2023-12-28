@@ -9,6 +9,8 @@ export class UserGetterUseCase {
     }
 
     async run(): Promise<User[]> {
-        return await this.userRepository.getAll();
+        const users = await this.userRepository.getAll();
+        if (users.length < 1) throw new Error('No users found');
+        return users;
     }
 }
