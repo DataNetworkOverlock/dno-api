@@ -5,6 +5,7 @@ import { createTest } from '@api/controllers/test/create-test.controller';
 import { deleteTest } from '@api/controllers/test/delete-test.controller';
 import { getAllTests } from '@api/controllers/test/get-tests.controller';
 import { getAllUsers } from '@api/controllers/user/get-users.controller';
+import { login } from '@api/controllers/login/login.controller';
 
 export {
     createUser as createUserController,
@@ -14,4 +15,5 @@ export {
     createTest as createTestController,
     deleteTest as deleteTestController,
     getAllTests as getTestsController,
+    login as loginController,
 };

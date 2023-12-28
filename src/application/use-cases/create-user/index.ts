@@ -25,13 +25,15 @@ export class CreateUserUseCase {
     }
 
     async run(params: UserInterface) {
+        const { name, username, password, question, answer } = params;
+
         const user = new User({
             uuid: new Uuid(this.uuidGenerator.generate()),
-            name: new Name(params.name),
-            username: new Username(params.username),
-            password: new Password(params.password),
-            question: new Question(params.question),
-            answer: new Answer(params.answer),
+            name: new Name(name),
+            username: new Username(username),
+            password: new Password(password),
+            question: new Question(question),
+            answer: new Answer(answer),
         });
         // TODO - Add exceptions
         const existUser: User | null = await this.userExists.run(user.username.value);

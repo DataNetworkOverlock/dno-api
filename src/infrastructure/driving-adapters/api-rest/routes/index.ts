@@ -2,12 +2,14 @@ import { NextFunction, Request, Response, Router } from 'express';
 import userRoutes from '@api/routes/user.routes';
 import scriptRoutes from '@api/routes/script.routes';
 import testRoutes from '@api/routes/test.routes';
+import loginRoutes from '@api/routes/login.routes';
 
 const route = Router();
 
 route.use('/users', userRoutes);
 route.use('/scripts', scriptRoutes);
 route.use('/tests', testRoutes);
+route.use('/login', loginRoutes);
 
 route.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.log('Error from router:', err);
