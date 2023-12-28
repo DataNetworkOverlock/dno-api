@@ -7,7 +7,7 @@ export class DeleteTestUseCase {
         this.testRepository = testRepository;
     }
 
-    async run(id: string) {
-        return await this.testRepository.delete(id);
+    async run(uuid: string) {
+        return await this.testRepository.delete(uuid);
     }
 }

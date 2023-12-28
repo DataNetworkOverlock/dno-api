@@ -1,8 +1,8 @@
-import { Date, Id, Ip, Report, ScriptId, UserId } from '@domain/entities/test/value-objects';
+import { Date, Uuid, Ip, Report, ScriptId, UserId } from '@domain/entities/test/value-objects';
 import { EntityRoot } from '@domain/entities/entity-root';
 
 interface PrimitiveData {
-    id: string;
+    uuid: string;
     ip: string;
     date: Date;
     report: string;
@@ -11,7 +11,7 @@ interface PrimitiveData {
 }
 
 export class Test extends EntityRoot<Test, PrimitiveData> {
-    readonly id: Id;
+    readonly uuid: Uuid;
     readonly ip: Ip;
     readonly date: Date;
     readonly report: Report;
@@ -19,14 +19,14 @@ export class Test extends EntityRoot<Test, PrimitiveData> {
     readonly scriptId: ScriptId;
 
     constructor({
-        id,
+        uuid,
         ip,
         date,
         report,
         userId,
         scriptId,
     }: {
-        id: Id;
+        uuid: Uuid;
         ip: Ip;
         date: Date;
         report: Report;
@@ -34,7 +34,7 @@ export class Test extends EntityRoot<Test, PrimitiveData> {
         scriptId: ScriptId;
     }) {
         super();
-        this.id = id;
+        this.uuid = uuid;
         this.ip = ip;
         this.date = date;
         this.report = report;
@@ -42,9 +42,9 @@ export class Test extends EntityRoot<Test, PrimitiveData> {
         this.scriptId = scriptId;
     }
 
-    static create(id: Id, ip: Ip, date: Date, report: Report, userId: UserId, scriptId: ScriptId): Test {
+    static create(uuid: Uuid, ip: Ip, date: Date, report: Report, userId: UserId, scriptId: ScriptId): Test {
         const test = new Test({
-            id,
+            uuid,
             ip,
             date,
             report,
@@ -56,7 +56,7 @@ export class Test extends EntityRoot<Test, PrimitiveData> {
     }
 
     static fromPrimitives(plainData: {
-        id: string;
+        uuid: string;
         ip: string;
         date: Date;
         report: string;
@@ -64,7 +64,7 @@ export class Test extends EntityRoot<Test, PrimitiveData> {
         scriptId: string;
     }): Test {
         return new Test({
-            id: new Id(plainData.id),
+            uuid: new Uuid(plainData.uuid),
             ip: new Ip(plainData.ip),
             date: new Date(plainData.date),
             report: new Report(plainData.report),
@@ -75,7 +75,7 @@ export class Test extends EntityRoot<Test, PrimitiveData> {
 
     toPrimitives(): PrimitiveData {
         return {
-            id: this.id.value,
+            uuid: this.uuid.value,
             ip: this.ip.value,
             date: this.date.value,
             report: this.report.value,

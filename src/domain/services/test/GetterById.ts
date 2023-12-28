@@ -8,11 +8,7 @@ export class TestGetterById {
         this.testRepository = testRepository;
     }
 
-    async run(testId: string): Promise<Test> {
-        const test = await this.testRepository.getById(testId);
-        if (!test) {
-            throw new Error('TestId not found');
-        }
-        return test;
+    async run(uuid: string): Promise<Test | null> {
+        return await this.testRepository.getById(uuid);
     }
 }

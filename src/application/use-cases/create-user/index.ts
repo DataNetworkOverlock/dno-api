@@ -1,5 +1,5 @@
 import { User } from '@domain/entities/user/user';
-import { Answer, Id, Name, Password, Question, Username } from '@domain/entities/user/value-objects';
+import { Answer, Uuid, Name, Password, Question, Username } from '@domain/entities/user/value-objects';
 import { UserRepository } from '@domain/repositories/user-repository';
 import { UserGetterByUsername } from '@domain/services/user/GetterByUsername';
 import { UuidGenerator } from '@domain/utils/uuidGenerator';
@@ -26,7 +26,7 @@ export class CreateUserUseCase {
 
     async run(params: UserInterface) {
         const user = new User({
-            id: new Id(this.uuidGenerator.generate()),
+            uuid: new Uuid(this.uuidGenerator.generate()),
             name: new Name(params.name),
             username: new Username(params.username),
             password: new Password(params.password),
@@ -34,9 +34,15 @@ export class CreateUserUseCase {
             answer: new Answer(params.answer),
         });
         // TODO - Add exceptions
-        const existUser = await this.userExists.run(user.username.value);
-        if (existUser === null) throw new Error('User already exists');
+        const existUser: User | null = await this.userExists.run(user.username.value);
+        if (existUser !== null) {
+            throw new Error('User already exists');
+        }
 
-        return await this.userRepository.create(user);
+        const result = await this.userRepository.create(user);
+        return {
+            result,
+            metadata: user.toPrimitives(),
+        };
     }
 }

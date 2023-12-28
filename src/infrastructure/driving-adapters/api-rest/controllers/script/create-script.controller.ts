@@ -17,7 +17,7 @@ export const createScript = async (req: Request, res: Response, next: NextFuncti
             source,
             tags,
         });
-        res.json(scriptCreated);
+        res.status(200).json(scriptCreated);
         return;
     } catch (err) {
         return next(err);

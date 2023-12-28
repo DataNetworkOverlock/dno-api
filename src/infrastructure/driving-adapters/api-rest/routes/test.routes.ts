@@ -5,6 +5,6 @@ const route = Router();
 
 route.get('', getTestsController);
 route.post('', createTestController);
-route.delete('/:id', deleteTestController);
+route.delete('/:uuid', deleteTestController);
 
 export default route;

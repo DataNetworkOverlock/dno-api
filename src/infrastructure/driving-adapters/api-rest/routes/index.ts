@@ -10,14 +10,23 @@ route.use('/scripts', scriptRoutes);
 route.use('/tests', testRoutes);
 
 route.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    console.log('Error from router:', err);
     if (err) {
         res.status(400).json({
-            message: err,
+            message: err.message,
         });
-        console.log('error:', err);
     } else {
         next(err);
     }
+});
+
+route.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    // TODO - Will be used when exceptions are implemented
+    console.log('Error del servidor:', err);
+    res.status(500).json({
+        message: 'Server: ' + err.message,
+    });
+    next(err);
 });
 
 export default route;
