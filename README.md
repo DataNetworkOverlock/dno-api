@@ -37,7 +37,7 @@ DB_HOST = localhost
 DB_USER = <mysql-user>
 DB_PASSWORd = <mysql-password>
 DB_NAME = <database-name>
-DB_PORT = 3306
+DB_PORT = <database-port>
 PORT = 5000
 ```
 
@@ -75,7 +75,7 @@ npm run test
 
 | Name                | Description                                                                                                                                  |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| index.js            | Entry point to Express app                                                                                                                   |
+| index.ts            | Entry point to Express app                                                                                                                   |
 | src/domain          | Core of the application. Defines entities, types, interfaces, services and utils. Basically, the business rules.                             |
 | src/application     | It's where business process flows are handled. It defines Use Cases for the app                                                              |
 | src/infrastructure  | Layer that access external services like databases. It uses driven and driving adapters to interact between the user and the infrastructure. |

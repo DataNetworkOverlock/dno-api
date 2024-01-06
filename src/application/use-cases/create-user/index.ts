@@ -1,9 +1,9 @@
 import { User } from '@domain/entities/user/user';
 import { Answer, Uuid, Name, Password, Question, Username } from '@domain/entities/user/value-objects';
+import { UserAlreadyExistsException } from '@domain/exceptions';
 import { UserRepository } from '@domain/repositories/user-repository';
 import { UserGetterByUsername } from '@domain/services/user/GetterByUsername';
 import { UuidGenerator } from '@domain/utils/uuidGenerator';
-// TODO - Exceptions come from domain/exceptions
 
 interface UserInterface {
     name: string;
@@ -27,6 +27,11 @@ export class CreateUserUseCase {
     async run(params: UserInterface) {
         const { name, username, password, question, answer } = params;
 
+        const existUser: User | null = await this.userExists.run(username);
+        if (existUser !== null) {
+            throw new UserAlreadyExistsException();
+        }
+
         const user = new User({
             uuid: new Uuid(this.uuidGenerator.generate()),
             name: new Name(name),
@@ -35,11 +40,6 @@ export class CreateUserUseCase {
             question: new Question(question),
             answer: new Answer(answer),
         });
-        // TODO - Add exceptions
-        const existUser: User | null = await this.userExists.run(user.username.value);
-        if (existUser !== null) {
-            throw new Error('User already exists');
-        }
 
         const result = await this.userRepository.create(user);
         return {
