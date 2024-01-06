@@ -1,5 +1,6 @@
 import { Uuid, Name, Username, Password, Question, Answer } from '@domain/entities/user/value-objects';
 import { EntityRoot } from '@domain/entities/entity-root';
+import { DefaultException } from '@domain/exceptions';
 
 interface PrimitiveData {
     uuid: string;
@@ -94,7 +95,7 @@ export class User extends EntityRoot<User, PrimitiveData> {
     passwordValid(password: string): boolean {
         // TODO: Insertar validaciones
         if (password.length <= 10) {
-            throw new Error('Clave muy corta');
+            throw new DefaultException('Clave muy corta');
         }
         return true;
     }

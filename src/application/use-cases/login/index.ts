@@ -1,3 +1,4 @@
+import { DefaultException, UserNotFoundException } from '@domain/exceptions';
 import { UserRepository } from '@domain/repositories/user-repository';
 import { UserGetterByUsername } from '@domain/services/user/GetterByUsername';
 
@@ -19,7 +20,7 @@ export class LoginUseCase {
         const { username, password } = params;
 
         const existUser = await this.userExists.run(username);
-        if (existUser === null) throw new Error("User doesn't exists");
+        if (existUser === null) throw new UserNotFoundException();
 
         // TODO - Validate password function
         // TODO - Password encryption
@@ -30,7 +31,7 @@ export class LoginUseCase {
                 username: existUser.username,
             };
         } else {
-            throw new Error('Username or Password incorrect');
+            throw new DefaultException('Username or Password incorrect');
         }
     }
 }

@@ -1,4 +1,5 @@
 import { Test } from '@domain/entities/test/test';
+import { DefaultException } from '@domain/exceptions';
 import { TestRepository } from '@domain/repositories/test-repository';
 
 export class TestGetterUseCase {
@@ -10,7 +11,7 @@ export class TestGetterUseCase {
 
     async run(): Promise<Test[]> {
         const tests = await this.testRepository.getAll();
-        if (tests.length < 1) throw new Error('No tests found');
+        if (tests.length < 1) throw new DefaultException('No Tests found');
         return tests;
     }
 }

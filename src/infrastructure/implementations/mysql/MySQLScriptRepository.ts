@@ -1,5 +1,6 @@
 import { Script } from '@domain/entities/script/script';
 import { Tag } from '@domain/entities/tag/tag';
+import { SQLException } from '@domain/exceptions';
 import { ScriptRepository } from '@domain/repositories/script-repository';
 import { MySQL } from '@infrastructure/driven-adapters/MySQL';
 
@@ -21,7 +22,7 @@ export class MySQLScriptRepository implements ScriptRepository {
             await this.addTags(data.uuid, script.tags.value);
             return scriptCreated;
         } catch (error) {
-            throw new Error(`Error al insertar: ${error}`);
+            throw new SQLException(`Error al insertar: ${error}`);
         }
     }
 
@@ -30,7 +31,7 @@ export class MySQLScriptRepository implements ScriptRepository {
         try {
             return await this.db.query(statement, uuid);
         } catch (error) {
-            throw new Error(`Error al eliminar: ${error}`);
+            throw new SQLException(`Error al eliminar: ${error}`);
         }
     }
 
@@ -39,7 +40,7 @@ export class MySQLScriptRepository implements ScriptRepository {
         try {
             return await this.db.query(statement, uuid);
         } catch (error) {
-            throw new Error(`Error al consultar: ${error}`);
+            throw new SQLException(`Error al consultar: ${error}`);
         }
     }
 
@@ -48,7 +49,7 @@ export class MySQLScriptRepository implements ScriptRepository {
         try {
             return await this.db.query(statement);
         } catch (error) {
-            throw new Error(`Error al consultar: ${error}`);
+            throw new SQLException(`Error al consultar: ${error}`);
         }
     }
 
@@ -57,7 +58,7 @@ export class MySQLScriptRepository implements ScriptRepository {
         try {
             return await this.db.query(statement);
         } catch (error) {
-            throw new Error(`Error al obtener las etiquetas: ${error}`);
+            throw new SQLException(`Error al obtener las etiquetas: ${error}`);
         }
     }
 
@@ -77,7 +78,7 @@ export class MySQLScriptRepository implements ScriptRepository {
             }
             return true;
         } catch (error) {
-            throw new Error(`Error al insertar las etiquetas: ${error}`);
+            throw new SQLException(`Error al insertar las etiquetas: ${error}`);
         }
     }
 }

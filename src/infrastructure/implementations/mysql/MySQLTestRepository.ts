@@ -1,4 +1,5 @@
 import { Test } from '@domain/entities/test/test';
+import { SQLException } from '@domain/exceptions';
 import { TestRepository } from '@domain/repositories/test-repository';
 import { MySQL } from '@infrastructure/driven-adapters/MySQL';
 
@@ -19,7 +20,7 @@ export class MySQLTestRepository implements TestRepository {
         try {
             return await this.db.query(statement, data);
         } catch (error) {
-            throw new Error(`Error al insertar: ${error}`);
+            throw new SQLException(`Error al insertar: ${error}`);
         }
     }
 
@@ -28,7 +29,7 @@ export class MySQLTestRepository implements TestRepository {
         try {
             return await this.db.query(statement, uuid);
         } catch (error) {
-            throw new Error(`Error al eliminar: ${error}`);
+            throw new SQLException(`Error al eliminar: ${error}`);
         }
     }
 
@@ -39,7 +40,7 @@ export class MySQLTestRepository implements TestRepository {
             if (test.length > 0) return test;
             return null;
         } catch (error) {
-            throw new Error(`Error al consultar: ${error}`);
+            throw new SQLException(`Error al consultar: ${error}`);
         }
     }
 
@@ -48,7 +49,7 @@ export class MySQLTestRepository implements TestRepository {
         try {
             return await this.db.query(statement, username);
         } catch (error) {
-            throw new Error(`Error al consultar tests: ${error}`);
+            throw new SQLException(`Error al consultar tests: ${error}`);
         }
     }
 
@@ -57,7 +58,7 @@ export class MySQLTestRepository implements TestRepository {
         try {
             return await this.db.query(statement);
         } catch (error) {
-            throw new Error(`Error al consultar: ${error}`);
+            throw new SQLException(`Error al consultar: ${error}`);
         }
     }
 }

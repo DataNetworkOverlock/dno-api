@@ -9,7 +9,6 @@ export class UserGetterById {
     }
 
     async run(uuid: string): Promise<User | null> {
-        // TODO - Add exceptions
         return await this.userRepository.getById(uuid);
     }
 }

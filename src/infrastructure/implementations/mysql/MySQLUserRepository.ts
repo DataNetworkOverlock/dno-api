@@ -1,4 +1,5 @@
 import { User } from '@domain/entities/user/user';
+import { SQLException } from '@domain/exceptions';
 import { UserRepository } from '@domain/repositories/user-repository';
 import { MySQL } from '@infrastructure/driven-adapters/MySQL';
 
@@ -19,7 +20,7 @@ export class MySQLUserRepository implements UserRepository {
         try {
             return await this.db.query(statement, data);
         } catch (error) {
-            throw new Error(`Error al insertar: ${error}`);
+            throw new SQLException(`Error al insertar: ${error}`);
         }
     }
 
@@ -28,7 +29,7 @@ export class MySQLUserRepository implements UserRepository {
         try {
             return await this.db.query(statement, uuid);
         } catch (error) {
-            throw new Error(`Error al eliminar: ${error}`);
+            throw new SQLException(`Error al eliminar: ${error}`);
         }
     }
 
@@ -39,13 +40,12 @@ export class MySQLUserRepository implements UserRepository {
             if (user.length > 0) return user;
             return null;
         } catch (error) {
-            throw new Error(`Error al consultar: ${error}`);
+            throw new SQLException(`Error al consultar: ${error}`);
         }
     }
 
     async getByUsername(username: string): Promise<User | null> {
-        // TODO - limit the user query
-        const statement = `SELECT * FROM ${this.table} WHERE username = ?`;
+        const statement = `SELECT uuid, name, username, password FROM ${this.table} WHERE username = ?`;
         try {
             const user = await this.db.query(statement, username);
             if (user.length > 0) {
@@ -54,7 +54,7 @@ export class MySQLUserRepository implements UserRepository {
             }
             return null;
         } catch (error) {
-            throw new Error(`Error al consultar: ${error}`);
+            throw new SQLException(`Error al consultar: ${error}`);
         }
     }
 
@@ -63,7 +63,7 @@ export class MySQLUserRepository implements UserRepository {
         try {
             return await this.db.query(statement);
         } catch (error) {
-            throw new Error(`Error al consultar: ${error}`);
+            throw new SQLException(`Error al consultar: ${error}`);
         }
     }
 }
