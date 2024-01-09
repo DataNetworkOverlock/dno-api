@@ -39,6 +39,7 @@ DB_PASSWORd = <mysql-password>
 DB_NAME = <database-name>
 DB_PORT = <database-port>
 PORT = 5000
+SECRET = <secret key to generate JWT>
 ```
 
 ## Execution
