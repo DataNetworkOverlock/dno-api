@@ -9,7 +9,7 @@ export class JWTHandlerImpl implements JWTHandler {
         return sign({ user }, this.SECRET, { expiresIn: this.EXPIRESIN });
     }
 
-    public validateAccessToken(accessToken: string | undefined): boolean {
+    validateAccessToken(accessToken: string | undefined): boolean {
         if (!accessToken) return false;
         const validToken = verify(accessToken, this.SECRET);
         return validToken !== undefined;
