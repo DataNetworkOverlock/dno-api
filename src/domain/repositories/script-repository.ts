@@ -3,6 +3,6 @@ import { Script } from '@domain/entities/script/script';
 export interface ScriptRepository {
     create: (script: Script) => Promise<Script>;
     delete: (uuid: string) => Promise<void>;
-    getById: (uuid: string) => Promise<Script>;
+    getById: (uuid: string) => Promise<Script | null>;
     getAll: () => Promise<Script[]>;
 }

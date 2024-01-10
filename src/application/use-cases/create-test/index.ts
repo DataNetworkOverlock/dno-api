@@ -1,5 +1,5 @@
 import { Test } from '@domain/entities/test/test';
-import { Date, Uuid, Ip, Report, ScriptId, UserId } from '@domain/entities/test/value-objects';
+import { Date, Uuid, Ip, Report, Script, User } from '@domain/entities/test/value-objects';
 import { TestRepository } from '@domain/repositories/test-repository';
 import { UuidGenerator } from '@domain/utils/uuidGenerator';
 
@@ -7,8 +7,8 @@ interface TestInterface {
     ip: string;
     date: Date;
     report: string;
-    userId: string;
-    scriptId: string;
+    user: string;
+    script: string;
 }
 
 export class CreateTestUseCase {
@@ -26,8 +26,8 @@ export class CreateTestUseCase {
             ip: new Ip(params.ip),
             date: new Date(params.date),
             report: new Report(params.report),
-            userId: new UserId(params.userId),
-            scriptId: new ScriptId(params.scriptId),
+            user: new User(params.user),
+            script: new Script(params.script),
         });
         const result = await this.testRepository.create(test);
         return {
