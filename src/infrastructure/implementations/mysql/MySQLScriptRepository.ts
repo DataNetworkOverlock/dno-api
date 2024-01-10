@@ -35,10 +35,15 @@ export class MySQLScriptRepository implements ScriptRepository {
         }
     }
 
-    async getById(uuid: string): Promise<Script> {
+    async getById(uuid: string): Promise<Script | null> {
         const statement = `SELECT * FROM ${this.table} WHERE uuid = ?`;
         try {
-            return await this.db.query(statement, uuid);
+            const script = await this.db.query(statement, uuid);
+            if (script.length > 0) {
+                const result = JSON.parse(JSON.stringify(script));
+                return result[0];
+            }
+            return null;
         } catch (error) {
             throw new SQLException(`Error al consultar: ${error}`);
         }
@@ -62,7 +67,7 @@ export class MySQLScriptRepository implements ScriptRepository {
         }
     }
 
-    private async addTags(scriptId: string, scriptTags: string[]): Promise<boolean> {
+    private async addTags(script: string, scriptTags: string[]): Promise<boolean> {
         const statement = `INSERT INTO ${this.tagTable} SET ?`;
         try {
             const tags = await this.getTags();
@@ -70,7 +75,7 @@ export class MySQLScriptRepository implements ScriptRepository {
                 const { id, name } = tags[i];
                 if (scriptTags.includes(name.toString())) {
                     const data = {
-                        script: scriptId,
+                        script: script,
                         tag: id,
                     };
                     await this.db.query(statement, data);

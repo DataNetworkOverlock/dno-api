@@ -1,9 +1,15 @@
 import { Router } from 'express';
-import { createTestController, deleteTestController, getTestsController } from '@api/controllers';
+import {
+    createTestController,
+    deleteTestController,
+    getTestsByUsernameController,
+    getTestsController,
+} from '@api/controllers';
 
 const route = Router();
 
 route.get('', getTestsController);
+route.get('/:username', getTestsByUsernameController);
 route.post('', createTestController);
 route.delete('/:uuid', deleteTestController);
 

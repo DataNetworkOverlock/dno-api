@@ -6,7 +6,7 @@ import { JWTHandlerImpl } from '@infrastructure/driven-adapters/JWT';
 import { NotAuthenticatedException } from '@domain/exceptions';
 
 export const createTest = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const { ip, date, report, userId, scriptId } = req.body;
+    const { ip, date, report, user, script } = req.body;
 
     const mysqlTestRepository = new MySQLTestRepository();
     const uuidV4Generator = new UuidV4Generator();
@@ -21,8 +21,8 @@ export const createTest = async (req: Request, res: Response, next: NextFunction
             ip,
             date,
             report,
-            userId,
-            scriptId,
+            user,
+            script,
         });
 
         res.status(200).json(testCreated);

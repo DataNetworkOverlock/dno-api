@@ -8,7 +8,7 @@ export class ScriptGetterById {
         this.scriptRepository = scriptRepository;
     }
 
-    async run(uuid: string): Promise<Script> {
+    async run(uuid: string): Promise<Script | null> {
         return await this.scriptRepository.getById(uuid);
     }
 }

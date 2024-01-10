@@ -14,8 +14,8 @@ export class MySQLTestRepository implements TestRepository {
             ip: test.ip.value,
             date: test.date.value,
             report: test.report.value,
-            user: test.userId.value,
-            script: test.scriptId.value,
+            user: test.user.value,
+            script: test.script.value,
         };
         try {
             return await this.db.query(statement, data);
@@ -44,10 +44,10 @@ export class MySQLTestRepository implements TestRepository {
         }
     }
 
-    async getByUser(username: string): Promise<Test[]> {
-        const statement = `SELECT * FROM ${this.table} WHERE username = ?`;
+    async getByUser(userUuid: string): Promise<Test[]> {
+        const statement = `SELECT * FROM ${this.table} WHERE user = ?`;
         try {
-            return await this.db.query(statement, username);
+            return await this.db.query(statement, userUuid);
         } catch (error) {
             throw new SQLException(`Error al consultar tests: ${error}`);
         }

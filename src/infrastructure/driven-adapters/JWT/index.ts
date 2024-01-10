@@ -1,3 +1,4 @@
+import { InvalidTokenException } from '@domain/exceptions';
 import { JWTHandler } from '@domain/utils/jwtHandler';
 import { sign, verify } from 'jsonwebtoken';
 
@@ -11,7 +12,11 @@ export class JWTHandlerImpl implements JWTHandler {
 
     validateAccessToken(accessToken: string | undefined): boolean {
         if (!accessToken) return false;
-        const validToken = verify(accessToken, this.SECRET);
-        return validToken !== undefined;
+        try {
+            const validToken = verify(accessToken, this.SECRET);
+            return validToken !== undefined;
+        } catch (err) {
+            throw new InvalidTokenException();
+        }
     }
 }
