@@ -30,7 +30,7 @@ export class Report {
     }
 }
 
-export class UserId {
+export class User {
     readonly value: string;
 
     constructor(value: string) {
@@ -38,7 +38,7 @@ export class UserId {
     }
 }
 
-export class ScriptId {
+export class Script {
     readonly value: string;
 
     constructor(value: string) {
