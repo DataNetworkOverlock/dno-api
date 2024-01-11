@@ -32,8 +32,8 @@ route.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     next(err);
 });
 
-route.use((err:Error,req: Request, res: Response) => {
-    console.error('Error 404', err);
+route.use((req: Request, res: Response) => {
+    console.error('Error 404');
     res.status(404).json({
         message: 'Server: Recurso no encontrado',
     });
