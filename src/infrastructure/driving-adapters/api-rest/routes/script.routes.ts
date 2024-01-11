@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { createScriptController } from '@api/controllers';
+import { createScriptController, getScriptsController } from '@api/controllers';
 
 const route = Router();
 
+route.get('', getScriptsController);
 route.post('', createScriptController);
 
 export default route;

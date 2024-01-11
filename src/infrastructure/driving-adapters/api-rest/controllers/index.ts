@@ -1,5 +1,6 @@
 import { login } from '@api/controllers/login/login.controller';
 import { createScript } from '@api/controllers/script/create-script.controller';
+import { getAllScripts } from '@api/controllers/script/get-scripts.controller';
 import { createTest } from '@api/controllers/test/create-test.controller';
 import { deleteTest } from '@api/controllers/test/delete-test.controller';
 import { getTestsByUsername } from '@api/controllers/test/get-tests-by-username.controller';
@@ -14,6 +15,7 @@ export {
     createUser as createUserController,
     deleteTest as deleteTestController,
     deleteUser as deleteUserController,
+    getAllScripts as getScriptsController,
     getTestsByUsername as getTestsByUsernameController,
     getAllTests as getTestsController,
     getAllUsers as getUsersController,
