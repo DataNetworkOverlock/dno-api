@@ -1,11 +1,12 @@
 import { EntityRoot } from '@domain/entities/entity-root';
-import { Description, Uuid, Name, Source, Tags } from '@domain/entities/script/value-objects';
+import { Description, Uuid, Name, Source, Tags, Parameters } from '@domain/entities/script/value-objects';
 
 interface PrimitiveData {
     uuid: string;
     name: string;
     description: string;
     source: string;
+    parameters: string;
     tags: string[];
 }
 
@@ -14,6 +15,7 @@ export class Script extends EntityRoot<Script, PrimitiveData> {
     readonly name: Name;
     readonly description: Description;
     readonly source: Source;
+    readonly parameters: Parameters;
     readonly tags: Tags;
 
     constructor({
@@ -21,12 +23,14 @@ export class Script extends EntityRoot<Script, PrimitiveData> {
         name,
         description,
         source,
+        parameters,
         tags,
     }: {
         uuid: Uuid;
         name: Name;
         description: Description;
         source: Source;
+        parameters: Parameters;
         tags: Tags;
     }) {
         super();
@@ -34,15 +38,24 @@ export class Script extends EntityRoot<Script, PrimitiveData> {
         this.name = name;
         this.description = description;
         this.source = source;
+        this.parameters = parameters;
         this.tags = tags;
     }
 
-    static create(uuid: Uuid, name: Name, description: Description, source: Source, tags: Tags): Script {
+    static create(
+        uuid: Uuid,
+        name: Name,
+        description: Description,
+        source: Source,
+        parameters: Parameters,
+        tags: Tags,
+    ): Script {
         const script = new Script({
             uuid,
             name,
             description,
             source,
+            parameters,
             tags,
         });
 
@@ -54,6 +67,7 @@ export class Script extends EntityRoot<Script, PrimitiveData> {
         name: string;
         description: string;
         source: string;
+        parameters: string;
         tags: string[];
     }): Script {
         return new Script({
@@ -61,6 +75,7 @@ export class Script extends EntityRoot<Script, PrimitiveData> {
             name: new Name(plainData.name),
             description: new Description(plainData.description),
             source: new Source(plainData.source),
+            parameters: new Parameters(plainData.parameters),
             tags: new Tags(plainData.tags),
         });
     }
@@ -71,6 +86,7 @@ export class Script extends EntityRoot<Script, PrimitiveData> {
             name: this.name.value,
             description: this.description.value,
             source: this.source.value,
+            parameters: this.parameters.value,
             tags: this.tags.value,
         };
     }
