@@ -17,6 +17,7 @@ export class MySQLScriptRepository implements ScriptRepository {
             name: script.name.value,
             description: script.description.value,
             source: script.source.value,
+            parameters: script.parameters.value,
         };
         try {
             const scriptCreated = await this.db.query(statement, data);
@@ -58,6 +59,8 @@ export class MySQLScriptRepository implements ScriptRepository {
                 const scriptsWithTags = JSON.parse(JSON.stringify(scripts));
                 for (let i = 0; i < scriptsWithTags.length; i++) {
                     const tags: string[] = await this.getTagsByScript(String(scriptsWithTags[i].uuid));
+                    const params = scriptsWithTags[i].parameters;
+                    scriptsWithTags[i].parameters = this.formatParameters(params);
                     scriptsWithTags[i].tags = tags;
                 }
                 return scriptsWithTags;
@@ -109,5 +112,9 @@ export class MySQLScriptRepository implements ScriptRepository {
         } catch (error) {
             throw new SQLException(`Error al insertar las etiquetas: ${error}`);
         }
+    }
+
+    private formatParameters(parameters: string): string[] {
+        return parameters.split(',');
     }
 }

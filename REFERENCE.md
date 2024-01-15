@@ -83,6 +83,7 @@ Payload:
     "name": "Nmap scan",
     "description": "Nmap script that checks on ports",
     "source": "/home/user/scripts/nmap",
+    "parameters": "param1,param2,param3",
     "tags": ["Nmap", "Red"]
 }
 ```
@@ -106,6 +107,7 @@ Output:
         "name": "Nmap scan",
         "description": "Nmap script that checks on ports",
         "source": "/home/user/scripts/nmap",
+        "parameters": "param1,param2,param3",
         "tags": ["Nmap", "Red"]
     }
 }
@@ -180,6 +182,7 @@ Output:
         "name": "Nmap scan",
         "description": "Nmap script that checks on ports",
         "source": "/home/user/scripts/nmap",
+        "parameters": ["param1", "param2"],
         "tags": ["Nmap", "Red"]
     }
 ]

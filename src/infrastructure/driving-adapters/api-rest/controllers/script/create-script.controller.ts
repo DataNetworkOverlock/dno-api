@@ -6,7 +6,7 @@ import { MySQLScriptRepository } from '@infrastructure/implementations/mysql/MyS
 import { NextFunction, Request, Response } from 'express';
 
 export const createScript = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const { name, description, source, tags } = req.body;
+    const { name, description, source, parameters, tags } = req.body;
 
     const mySQLScriptRepository = new MySQLScriptRepository();
     const uuidV4Generator = new UuidV4Generator();
@@ -21,6 +21,7 @@ export const createScript = async (req: Request, res: Response, next: NextFuncti
             name,
             description,
             source,
+            parameters,
             tags,
         });
         res.status(200).json(scriptCreated);
